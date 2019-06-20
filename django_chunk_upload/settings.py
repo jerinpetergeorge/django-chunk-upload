@@ -36,8 +36,11 @@ UPLOAD_TO = getattr(settings, 'DJANGO_CHUNK_UPLOAD_TO', default_upload_to)
 # Storage system
 STORAGE = getattr(settings, 'DJANGO_CHUNK_UPLOAD_STORAGE_CLASS', lambda: None)()
 
-# Boolean that defines if the ChunkedUpload model is abstract or not
+# Boolean that defines if the ChunkUpload model is abstract or not
 ABSTRACT_MODEL = getattr(settings, 'DJANGO_CHUNK_UPLOAD_ABSTRACT_MODEL', True)
+
+# Boolean that defines whether the "user" field can be "null" or not
+NULL_USER = getattr(settings, 'DJANGO_CHUNK_UPLOAD_NULL_USER', True)
 
 # Function used to encode response data. Receives a dict and return a string
 DEFAULT_ENCODER = DjangoJSONEncoder().encode
