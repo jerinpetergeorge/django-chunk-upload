@@ -136,11 +136,6 @@ Add any of these variables into your project settings to override them.
 * Content-Type for the response data.
 * Default: ``'application/json'``
 
-``DJANGO_CHUNK_UPLOAD_MIMETYPE``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* **Deprecated**, use ``CHUNK_UPLOAD_CONTENT_TYPE`` instead.
-
 ``DJANGO_CHUNK_UPLOAD_MAX_BYTES``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
