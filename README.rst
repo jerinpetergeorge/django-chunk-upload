@@ -10,7 +10,7 @@ License: `MIT-Zero <https://romanrm.net/mit-zero>`__.
 Demo
 ----
 
-If you want to see a very simple Django demo project using this module, please take a look at `django-chunked-upload-demo <https://github.com/juliomalegria/django-chunked-upload-demo>`__.
+If you want to see a very simple Django demo project using this module, please take a look at `django-chunk-upload-demo <https://github.com/jerinpetergeorge/django-chunk-upload-demo>`__.
 
 Installation
 ------------
