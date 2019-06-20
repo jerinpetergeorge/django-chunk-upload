@@ -1,9 +1,9 @@
 """
-Exceptions raised by django-chunked-upload.
+Exceptions raised by django-chunk-upload.
 """
 
 
-class ChunkedUploadError(Exception):
+class ChunkUploadError(Exception):
     """
     Exception raised if errors in the request/process.
     """

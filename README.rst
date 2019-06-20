@@ -1,4 +1,4 @@
-django-chunked-upload
+django-chunk-upload
 =====================
 
 This simple django app enables users to upload large files to Django in multiple chunks, with the ability to resume if the upload is interrupted.
@@ -10,7 +10,7 @@ License: `MIT-Zero <https://romanrm.net/mit-zero>`__.
 Demo
 ----
 
-If you want to see a very simple Django demo project using this module, please take a look at `django-chunked-upload-demo <https://github.com/juliomalegria/django-chunked-upload-demo>`__.
+If you want to see a very simple Django demo project using this module, please take a look at `django-chunk-upload-demo <https://github.com/jerinpetergeorge/django-chunk-upload-demo>`__.
 
 Installation
 ------------
@@ -19,7 +19,7 @@ Install via pip:
 
 ::
 
-    pip install django-chunked-upload
+    pip install django-chunk-upload
 
 And then add it to your Django ``INSTALLED_APPS``:
 
@@ -27,13 +27,13 @@ And then add it to your Django ``INSTALLED_APPS``:
 
     INSTALLED_APPS = (
         # ...
-        'chunked_upload',
+        'django_chunk_upload',
     )
 
 Typical usage
 -------------
 
-1. An initial POST request is sent to the url linked to ``ChunkedUploadView`` (or any subclass) with the first chunk of the file. The name of the chunk file can be overriden in the view (class attribute ``field_name``). Example:
+1. An initial POST request is sent to the url linked to ``ChunkUploadView`` (or any subclass) with the first chunk of the file. The name of the chunk file can be overriden in the view (class attribute ``field_name``). Example:
 
 ::
 
@@ -49,7 +49,7 @@ Typical usage
         "expires": "2013-07-18T17:56:22.186Z"
     }
 
-3. Repeatedly POST subsequent chunks using the ``upload_id`` to identify the upload  to the url linked to ``ChunkedUploadView`` (or any subclass). Example:
+3. Repeatedly POST subsequent chunks using the ``upload_id`` to identify the upload  to the url linked to ``ChunkUploadView`` (or any subclass). Example:
 
 ::
 
@@ -60,7 +60,7 @@ Typical usage
 
 4. Server will continue responding with the ``upload_id``, the current ``offset`` and the expiration date (``expires``).
 
-5. Finally, when upload is completed, a POST request is sent to the url linked to ``ChunkedUploadCompleteView`` (or any subclass). This request must include the ``upload_id`` and the ``md5`` checksum (hex). Example:
+5. Finally, when upload is completed, a POST request is sent to the url linked to ``ChunkUploadCompleteView`` (or any subclass). This request must include the ``upload_id`` and the ``md5`` checksum (hex). Example:
 
 ::
 
@@ -88,54 +88,54 @@ Settings
 
 Add any of these variables into your project settings to override them.
 
-``CHUNKED_UPLOAD_EXPIRATION_DELTA``
+``CHUNK_UPLOAD_EXPIRATION_DELTA``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * How long after creation the upload will expire.
 * Default: ``datetime.timedelta(days=1)``
 
-``CHUNKED_UPLOAD_PATH``
+``CHUNK_UPLOAD_PATH``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * Path where uploading files will be stored until completion.
-* Default: ``'chunked_uploads/%Y/%m/%d'``
+* Default: ``'chunk_uploads/%Y/%m/%d'``
 
-``CHUNKED_UPLOAD_TO``
+``CHUNK_UPLOAD_TO``
 ~~~~~~~~~~~~~~~~~~~~~
 
 * `upload_to` to be used in the Model's FileField.
-* Default: ``CHUNKED_UPLOAD_PATH + '/{{ instance.upload_id }}.part'``
+* Default: ``CHUNK_UPLOAD_PATH + '/{{ instance.upload_id }}.part'``
 
-``CHUNKED_UPLOAD_STORAGE_CLASS``
+``CHUNK_UPLOAD_STORAGE_CLASS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Storage system (should be a class).
 * Default: ``None`` (use default storage system)
 
-``CHUNKED_UPLOAD_ABSTRACT_MODEL``
+``CHUNK_UPLOAD_ABSTRACT_MODEL``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Boolean that defines if the ``ChunkedUpload`` model will be abstract or not (`what does abstract model mean? <https://docs.djangoproject.com/en/1.4/ref/models/options/#abstract>`__).
+* Boolean that defines if the ``ChunkUpload`` model will be abstract or not (`what does abstract model mean? <https://docs.djangoproject.com/en/1.4/ref/models/options/#abstract>`__).
 * Default: ``True``
 
-``CHUNKED_UPLOAD_ENCODER``
+``CHUNK_UPLOAD_ENCODER``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Function used to encode response data. Receives a dict and returns a string.
 * Default: ``DjangoJSONEncoder().encode``
 
-``CHUNKED_UPLOAD_CONTENT_TYPE``
+``CHUNK_UPLOAD_CONTENT_TYPE``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Content-Type for the response data.
 * Default: ``'application/json'``
 
-``CHUNKED_UPLOAD_MIMETYPE``
+``CHUNK_UPLOAD_MIMETYPE``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* **Deprecated**, use ``CHUNKED_UPLOAD_CONTENT_TYPE`` instead.
+* **Deprecated**, use ``CHUNK_UPLOAD_CONTENT_TYPE`` instead.
 
-``CHUNKED_UPLOAD_MAX_BYTES``
+``CHUNK_UPLOAD_MAX_BYTES``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Max amount of data (in bytes) that can be uploaded. ``None`` means no limit.
@@ -144,4 +144,4 @@ Add any of these variables into your project settings to override them.
 Support
 -------
 
-If you find any bug or you want to propose a new feature, please use the `issues tracker <https://github.com/juliomalegria/django-chunked-upload/issues>`__. I'll be happy to help you! :-)
+If you find any bug or you want to propose a new feature, please use the `issues tracker <https://github.com/jerinpetergeorge/django-chunk-upload/issues>`__. I'll be happy to help you! :-)
