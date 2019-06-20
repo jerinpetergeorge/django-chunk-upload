@@ -7,10 +7,11 @@ class http_status:
     HTTP_403_FORBIDDEN = 403
     HTTP_410_GONE = 410
 
+
 UPLOADING = 1
 COMPLETE = 2
 
-CHUNKED_UPLOAD_CHOICES = (
+CHUNK_UPLOAD_CHOICES = (
     (UPLOADING, _('Uploading')),
     (COMPLETE, _('Complete')),
 )

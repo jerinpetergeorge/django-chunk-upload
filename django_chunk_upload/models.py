@@ -7,7 +7,7 @@ from django.core.files.uploadedfile import UploadedFile
 from django.utils import timezone
 
 from .settings import EXPIRATION_DELTA, UPLOAD_TO, STORAGE, ABSTRACT_MODEL
-from .constants import CHUNKED_UPLOAD_CHOICES, UPLOADING
+from .constants import CHUNK_UPLOAD_CHOICES, UPLOADING
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -16,9 +16,9 @@ def generate_upload_id():
     return uuid.uuid4().hex
 
 
-class BaseChunkedUpload(models.Model):
+class BaseChunkUpload(models.Model):
     """
-    Base chunked upload model. This model is abstract (doesn't create a table
+    Base chunk upload model. This model is abstract (doesn't create a table
     in the database).
     Inherit from this model to implement your own.
     """
@@ -30,7 +30,7 @@ class BaseChunkedUpload(models.Model):
     filename = models.CharField(max_length=255)
     offset = models.BigIntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
-    status = models.PositiveSmallIntegerField(choices=CHUNKED_UPLOAD_CHOICES,
+    status = models.PositiveSmallIntegerField(choices=CHUNK_UPLOAD_CHOICES,
                                               default=UPLOADING)
     completed_on = models.DateTimeField(null=True, blank=True)
 
@@ -54,7 +54,7 @@ class BaseChunkedUpload(models.Model):
     def delete(self, delete_file=True, *args, **kwargs):
         if self.file:
             storage, path = self.file.storage, self.file.path
-        super(BaseChunkedUpload, self).delete(*args, **kwargs)
+        super(BaseChunkUpload, self).delete(*args, **kwargs)
         if self.file and delete_file:
             storage.delete(path)
 
@@ -88,13 +88,13 @@ class BaseChunkedUpload(models.Model):
         abstract = True
 
 
-class ChunkedUpload(BaseChunkedUpload):
+class ChunkUpload(BaseChunkUpload):
     """
-    Default chunked upload model.
-    To use it, set CHUNKED_UPLOAD_ABSTRACT_MODEL as True in your settings.
+    Default chunk upload model.
+    To use it, set CHUNK_UPLOAD_ABSTRACT_MODEL as True in your settings.
     """
 
-    user = models.ForeignKey(AUTH_USER_MODEL, related_name='chunked_uploads',
+    user = models.ForeignKey(AUTH_USER_MODEL, related_name='chunk_uploads',
                              on_delete=models.CASCADE)
 
     class Meta:

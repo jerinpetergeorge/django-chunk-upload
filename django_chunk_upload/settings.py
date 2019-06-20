@@ -15,49 +15,43 @@ except ImportError:
     except ImportError:
         raise ImportError('Dude! what version of Django are you using?')
 
-
 # How long after creation the upload will expire
 DEFAULT_EXPIRATION_DELTA = timedelta(days=1)
-EXPIRATION_DELTA = getattr(settings, 'CHUNKED_UPLOAD_EXPIRATION_DELTA',
+EXPIRATION_DELTA = getattr(settings, 'DJANGO_CHUNK_UPLOAD_EXPIRATION_DELTA',
                            DEFAULT_EXPIRATION_DELTA)
 
-
 # Path where uploading files will be stored until completion
-DEFAULT_UPLOAD_PATH = 'chunked_uploads/%Y/%m/%d'
-UPLOAD_PATH = getattr(settings, 'CHUNKED_UPLOAD_PATH', DEFAULT_UPLOAD_PATH)
+DEFAULT_UPLOAD_PATH = 'chunk_uploads/%Y/%m/%d'
+UPLOAD_PATH = getattr(settings, 'DJANGO_CHUNK_UPLOAD_PATH', DEFAULT_UPLOAD_PATH)
 
 
 # upload_to function to be used in the FileField
 def default_upload_to(instance, filename):
     filename = os.path.join(UPLOAD_PATH, instance.upload_id + '.part')
     return time.strftime(filename)
-UPLOAD_TO = getattr(settings, 'CHUNKED_UPLOAD_TO', default_upload_to)
 
+
+UPLOAD_TO = getattr(settings, 'DJANGO_CHUNK_UPLOAD_TO', default_upload_to)
 
 # Storage system
-STORAGE = getattr(settings, 'CHUNKED_UPLOAD_STORAGE_CLASS', lambda: None)()
-
+STORAGE = getattr(settings, 'DJANGO_CHUNK_UPLOAD_STORAGE_CLASS', lambda: None)()
 
 # Boolean that defines if the ChunkedUpload model is abstract or not
-ABSTRACT_MODEL = getattr(settings, 'CHUNKED_UPLOAD_ABSTRACT_MODEL', True)
-
+ABSTRACT_MODEL = getattr(settings, 'DJANGO_CHUNK_UPLOAD_ABSTRACT_MODEL', True)
 
 # Function used to encode response data. Receives a dict and return a string
 DEFAULT_ENCODER = DjangoJSONEncoder().encode
-ENCODER = getattr(settings, 'CHUNKED_UPLOAD_ENCODER', DEFAULT_ENCODER)
-
+ENCODER = getattr(settings, 'DJANGO_CHUNK_UPLOAD_ENCODER', DEFAULT_ENCODER)
 
 # Content-Type for the response data
-DEFAULT_CONTENT_TYPE = 'application/json'
-CONTENT_TYPE = getattr(settings, 'CHUNKED_UPLOAD_CONTENT_TYPE',
+DEFAULT_CONTENT_TYPE = '.flake8application/json'
+CONTENT_TYPE = getattr(settings, 'DJANGO_CHUNK_UPLOAD_CONTENT_TYPE',
                        DEFAULT_CONTENT_TYPE)
-
 
 # CHUNKED_UPLOAD_MIMETYPE is deprecated, but kept for backward compatibility
-CONTENT_TYPE = getattr(settings, 'CHUNKED_UPLOAD_MIMETYPE',
+CONTENT_TYPE = getattr(settings, 'DJANGO_CHUNK_UPLOAD_MIMETYPE',
                        DEFAULT_CONTENT_TYPE)
-
 
 # Max amount of data (in bytes) that can be uploaded. `None` means no limit
 DEFAULT_MAX_BYTES = None
-MAX_BYTES = getattr(settings, 'CHUNKED_UPLOAD_MAX_BYTES', DEFAULT_MAX_BYTES)
+MAX_BYTES = getattr(settings, 'DJANGO_CHUNK_UPLOAD_MAX_BYTES', DEFAULT_MAX_BYTES)
