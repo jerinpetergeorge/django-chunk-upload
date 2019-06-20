@@ -90,54 +90,58 @@ Settings
 
 Add any of these variables into your project settings to override them.
 
-``CHUNK_UPLOAD_EXPIRATION_DELTA``
+``DJANGO_CHUNK_UPLOAD_EXPIRATION_DELTA``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * How long after creation the upload will expire.
 * Default: ``datetime.timedelta(days=1)``
 
-``CHUNK_UPLOAD_PATH``
+``DJANGO_CHUNK_UPLOAD_PATH``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * Path where uploading files will be stored until completion.
 * Default: ``'chunk_uploads/%Y/%m/%d'``
 
-``CHUNK_UPLOAD_TO``
+``DJANGO_CHUNK_UPLOAD_TO``
 ~~~~~~~~~~~~~~~~~~~~~
 
 * `upload_to` to be used in the Model's FileField.
-* Default: ``CHUNK_UPLOAD_PATH + '/{{ instance.upload_id }}.part'``
+* Default: ``DJANGO_CHUNK_UPLOAD_PATH + '/{{ instance.upload_id }}.part'``
 
-``CHUNK_UPLOAD_STORAGE_CLASS``
+``DJANGO_CHUNK_UPLOAD_STORAGE_CLASS``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Storage system (should be a class).
 * Default: ``None`` (use default storage system)
 
-``CHUNK_UPLOAD_ABSTRACT_MODEL``
+``DJANGO_CHUNK_UPLOAD_ABSTRACT_MODEL``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Boolean that defines if the ``ChunkUpload`` model will be abstract or not (`what does abstract model mean? <https://docs.djangoproject.com/en/1.4/ref/models/options/#abstract>`__).
 * Default: ``True``
 
-``CHUNK_UPLOAD_ENCODER``
+``DJANGO_CHUNK_UPLOAD_NULL_USER``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Boolean that defines whether the "user" field of ``ChunkUpload`` model can be ``NULL`` or not
+* Default: ``True``
+``DJANGO_CHUNK_UPLOAD_ENCODER``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Function used to encode response data. Receives a dict and returns a string.
 * Default: ``DjangoJSONEncoder().encode``
 
-``CHUNK_UPLOAD_CONTENT_TYPE``
+``DJANGO_CHUNK_UPLOAD_CONTENT_TYPE``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Content-Type for the response data.
 * Default: ``'application/json'``
 
-``CHUNK_UPLOAD_MIMETYPE``
+``DJANGO_CHUNK_UPLOAD_MIMETYPE``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Deprecated**, use ``CHUNK_UPLOAD_CONTENT_TYPE`` instead.
 
-``CHUNK_UPLOAD_MAX_BYTES``
+``DJANGO_CHUNK_UPLOAD_MAX_BYTES``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Max amount of data (in bytes) that can be uploaded. ``None`` means no limit.
