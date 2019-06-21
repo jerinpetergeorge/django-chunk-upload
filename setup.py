@@ -15,7 +15,6 @@ download_url = (
     'https://github.com/jerinpetergeorge/django-chunk-upload/tarball/%s'
 )
 
-
 setup(
     name='django-chunk-upload',
     packages=['django_chunk_upload'],
@@ -23,6 +22,7 @@ setup(
     description=('Upload large files to Django in multiple chunks, with the '
                  'ability to resume if the upload is interrupted.'),
     long_description=readme,
+    long_description_content_type='text/x-rst',
     author='Jerin Peter George',
     author_email='jerinpetergeorge@gmail.com',
     url='https://github.com/jerinpetergeorge/django-chunk-upload',
