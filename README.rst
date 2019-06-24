@@ -114,7 +114,7 @@ Add any of these variables into your project settings to override them.
 * Storage system (should be a class).
 * Default: ``None`` (use default storage system)
 
-``CHUNKED_UPLOAD_USE_TEMP_STORAGE``
+``DJANGO_CHUNK_UPLOAD_USE_TEMP_STORAGE``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Activates temporary file storage. Useful for AWS S3.
