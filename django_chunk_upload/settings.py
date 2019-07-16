@@ -40,7 +40,7 @@ if not USE_TEMP_STORAGE:
     STORAGE = getattr(settings, 'DJANGO_CHUNK_UPLOAD_STORAGE_CLASS', lambda: None)()
 # Use temporary storage for chunks
 else:
-    from chunked_upload.storages import TemporaryFileStorage
+    from django_chunk_upload.storages import TemporaryFileStorage
     STORAGE = TemporaryFileStorage()
 
 # Boolean that defines if the ChunkUpload model is abstract or not
